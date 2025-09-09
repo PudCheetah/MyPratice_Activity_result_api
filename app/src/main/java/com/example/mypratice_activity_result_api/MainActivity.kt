@@ -21,24 +21,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // registerForActivityResult() 必須在 onCreate/onViewCreated 期間呼叫。
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-            // 處理回傳的結果
+            // 處理回傳的結果，根據不同的結果碼來進行操作
             when(result.resultCode){
-                RESULT_OK -> {
-                    // 處理成功且有夾帶資料的回乎結果
-                    if(result.data != null){
+                RESULT_OK -> {    // 處理成功
+                    if(result.data != null){    // 處理成功且有夾帶資料的回乎結果
                         binding.tvResultCallBackValue.text = result.resultCode.toString()
                         Toast.makeText(this, "ResultCode: ${result.resultCode}", Toast.LENGTH_SHORT).show()
-                    }else{
-                        // 處理成功但沒有夾帶資料的回乎結果
+                    }else{    // 處理成功且沒有夾帶資料的回乎結果
                         binding.tvResultCallBackValue.text = result.resultCode.toString()
                         Toast.makeText(this, "ResultCode: ${result.resultCode}", Toast.LENGTH_SHORT).show()
                     }
                 }
-                RESULT_CANCELED -> {
-                    // 處理失敗
+                RESULT_CANCELED -> {    // 處理失敗
                     binding.tvResultCallBackValue.text = result.resultCode.toString()
                     Toast.makeText(this, "ResultCode: ${result.resultCode}", Toast.LENGTH_SHORT).show() }
-                else -> {
+                else -> {    // 處理其他狀況
                     binding.tvResultCallBackValue.text = result.resultCode.toString()
                     Toast.makeText(this, "ResultCode: ${result.resultCode}", Toast.LENGTH_SHORT).show()
                 }
